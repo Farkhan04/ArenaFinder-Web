@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link rel="shortcut icon" type="image/png" href="../images/favicon.png">
+    <link href="../css/message.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+    <title>Login Form</title>
+</head>
+<style>
+body { margin-top:30px; overflow-x: hidden; background-color: #e7f5ff; }
+hr.message-inner-separator {
+    clear: both;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.15),rgba(0, 0, 0, 0));
+}
+.container {
+    position: absolute;
+    left: 30%;
+}
+#box-alert {
+    background-color: #02406d;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    #box-alert {
+        width: 500px;
+        margin-left: -120px;
+    }
+}
+</style>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-6">
+                <div class="alert" id="box-alert">
+                    <span class="glyphicon glyphicon-ok"></span> <strong>Email <span style="color: #a1ff9f;">Terkirim</span></strong>
+                    <hr class="message-inner-separator" style="background-color: white;">
+                    <p>Link Ubah Sandi Terkirim! Segera Cek Inbox Email Anda untuk Menuju ke Halaman Pergantian Sandi. <i class="fas fa-envelope" style="color: #a1ff9f;"></i></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script untuk redirect setelah 10 detik -->
+    <script>
+        setTimeout(function() {
+            window.location.href = "../admin/lupaPassword_OTP.php";
+        }, 10000); // 10 detik dalam milidetik
+    </script>
+</body>
+</html>

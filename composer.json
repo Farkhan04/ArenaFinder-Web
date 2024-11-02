@@ -1,0 +1,17 @@
+{
+    "name": "lenovo/arena-finder-web-v2",
+    "autoload": {
+        "psr-4": {
+            "Lenovo\\ArenaFinderWebV2\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Farkhan",
+            "email": "e41230747@student.polije.ac.id"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    }
+}
