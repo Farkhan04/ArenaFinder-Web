@@ -67,7 +67,7 @@
                                         <img src="../img_asset/login.png" alt="" style="width: 200px; height: auto; margin-bottom: 20px" />
                                     </div>
 
-                                    <form class="user" method="POST" action="#" autocomplete="off" name="login">
+                                    <form class="user" method="POST" action="../Controller/login.php" autocomplete="off" name="login">
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user" id="email-input" name="email"
                                                 aria-describedby="emailHelp" placeholder="Enter Email Address..." autocomplete="off"
@@ -79,10 +79,8 @@
 
                                             <input type="hidden" name="level" value="<?php echo $levelValue; ?>" id="level" />
                                         </div>
-                                        <div class="form-group mt-3">
+                                        <div class="form-group mt-3" >
                                             <button class="btn btn-user btn-block" id="btn-login" name="login">Masuk</button>
-                                            <?php include ("../Controller/login.php")
-                                            ?>
                                         </div>
                                     </form>
 
