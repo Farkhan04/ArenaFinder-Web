@@ -31,7 +31,7 @@
 
                 <?php include("lapangan.php"); ?>
 
-            </div>
+            </div> 
         </div>
 
 
