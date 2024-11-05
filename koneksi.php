@@ -1,8 +1,8 @@
 <?php
-$server = "localhost"; // Mengganti $_server menjadi $server
+$server = "localhost"; 
 $username = "root";
 $password = "";
-$database = "arenafinder"; // Mengganti $db menjadi $database
+$database = "arenafinder"; 
 
 // membuat koneksi ke database
 $conn = new mysqli($server, $username, $password, $database);
