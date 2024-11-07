@@ -49,7 +49,7 @@ if (isset($_POST["register"])) {
                     $mail->Username = 'tengkufarkhan3@gmail.com';
                     $mail->Password = 'bynv cdfj izrp wiho';
 
-                    $mail->setFrom('hanntok2802@gmail.com', 'OTP Verification');
+                    $mail->setFrom('hanntok2802@gmail.com', 'ArenaFinder');
                     $mail->addAddress($email);
 
                     $mail->isHTML(true);
