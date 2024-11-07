@@ -6,6 +6,8 @@ if (isset($_POST["login"])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $level = $_POST['level'];
+ 
+
 
     // Validation: Check if email and password are not empty
     if (empty($email) && empty($password)) {
@@ -30,7 +32,7 @@ if (isset($_POST["login"])) {
             alert("Mohon isi sandi.");
             window.location.replace('../admin/login.php');
         </script>
-        <?php
+    <?php
         exit();
     }
 
@@ -55,23 +57,20 @@ if (isset($_POST["login"])) {
         $hashpassword = $fetch["password"];
 
         // Get user level and other details
-        $userLevel = $Fetch["level"];
+        $userLevel = $fetch["level"];
         $userName = $fetch["username"];
         $sportFromDB = $fetch["sport"];
-
-        $_SESSION['level'] = $userLevel; // Set session with user level
 
         if ($fetch["is_verified"] == 0) {
             $_SESSION['message'] = "Tolong Verifikasi Akun Email sebelum Login.";
             header("Location: ../admin/login.php");
             exit();
         } elseif (password_verify($password, $hashpassword)) {
-            $_SESSION['email'] = $email; // Save email in session
+            $_SESSION['email'] = $email;
             $_SESSION['level'] = $userLevel;
-            $_SESSION['id_venue'] = $fetch['id_venue'];
             $_SESSION['nama_venue'] = $fetch['nama_venue'];
             $_SESSION['username'] = $userName;
-            $_SESSION['sport'] = $sportFromDB; // Save sport in session
+            $_SESSION['sport'] = $sportFromDB;
             header("Location: ../admin/index.php");
             exit();
         } else {
@@ -84,15 +83,13 @@ if (isset($_POST["login"])) {
             exit();
         }
     } else {
-        // Email not registered
         ?>
         <script>
             alert("<?php echo "Email belum terdaftar. Silakan daftar terlebih dahulu." ?>");
-            window.location.replace('../admin/daftar.php'); // Change 'register.php' to your registration page
+            window.location.replace('../admin/daftar.php');
         </script>
 <?php
         exit();
     }
 }
-
 ?>
