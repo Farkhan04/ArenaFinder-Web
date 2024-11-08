@@ -1,4 +1,5 @@
 <!-- Content Row -->
+<div class="container-fluid">
 <div class="row">
 
     <!-- Schedule On Card -->
@@ -100,4 +101,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>

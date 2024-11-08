@@ -1,8 +1,8 @@
 <?php
 include("../koneksi.php");
 ?>
-
-<table class="table text-nowrap table-centered table-hover" id="dataTable" width="100%" cellspacing="0">
+<div class="mx-lg-3">
+<table class="table table-responsive text-nowrap table-centered table-hover" id="dataTable" width="100%" cellspacing="0">
     <thead>
         <tr>
             <th scope="col">No.</th>
@@ -103,7 +103,7 @@ include("../koneksi.php");
         <?php } ?>
     </tbody>
 </table>
-
+</div>
 <!-- Pagination code -->
 <ul class='pagination'>
     <?php

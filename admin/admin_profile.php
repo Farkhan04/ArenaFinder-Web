@@ -1,70 +1,72 @@
 <?php
-session_start();
-include('../koneksi.php');
+session_start(); // Pastikan ini adalah yang pertama di file
 
-// Cek apakah pengguna sudah login
-if (!isset($_SESSION['email'])) {
-    header("Location: login.php");
-    exit();
-}
-
-// Ambil data dari session
-$email = $_SESSION['email'];
-$userName = $_SESSION['username'];
-$userLevel = isset($_SESSION['level']) ? $_SESSION['level'] : 'Level tidak tersedia';
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil Pengguna</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 20px;
-        }
-        .profile-container {
-            max-width: 600px;
-            margin: auto;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .profile-header {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        .profile-info {
-            font-size: 16px;
-            color: #555;
-        }
-        .profile-info p {
-            margin: 10px 0;
-        }
-    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ArenaFinder</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
+
+    <!-- Custom styles for this template -->
+    <link href="../vendor/css/sb-admin-2.min.css" rel="stylesheet">
 </head>
-<body>
 
-<div class="profile-container">
-    <h2 class="profile-header">Profil Pengguna</h2>
-    <div class="profile-info">
-        <p><strong>Nama Pengguna:</strong> <?php echo htmlspecialchars($userName); ?></p>
-        <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
-        <p><strong>Level:</strong> <?php echo htmlspecialchars($userLevel); ?></p>
-    </div>
-    <div class="text-center mt-4">
-        <a href="../Controller/edit_profile.php" class="btn btn-primary">Edit Nama Pengguna</a>
-    </div>
-</div>
+<body id="page-top">
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <?php include("sidebar.php"); ?>
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Navbar -->
+                <?php include("nav.php"); ?>
+
+                <!-- Profile Content -->
+                <?php include("profile.php"); ?>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript -->
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages -->
+    <script src="../vendor/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="../vendor/chart.js/Chart.min.js"></script>
+    <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="../vendor/js/demo/chart-area-demo.js"></script>
+    <script src="../vendor/js/demo/chart-pie-demo.js"></script>
 </body>
+
 </html>

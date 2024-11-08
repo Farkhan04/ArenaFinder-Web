@@ -114,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if (!empty($_FILES['foto']['name'])) {
                         $nama_file = $_FILES['foto']['name'];
                         $tmp = $_FILES['foto']['tmp_name'];
-                        $upload_folder = '../img';
+                        $upload_folder = '../img/';
 
                         // Pindahkan file gambar ke folder tujuan
                         if (move_uploaded_file($tmp, $upload_folder . $nama_file)) {
@@ -165,3 +165,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: ../admin/admin_aktivitas.php"); // Redirect ke halaman aktivitas setelah form diproses
     exit();
 }
+ 
