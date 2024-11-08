@@ -49,6 +49,15 @@ $userLevel = isset($_SESSION['level']) ? $_SESSION['level'] : 'Level tidak terse
 </head>
 <body>
 <div class="container-fluid">
+<div class="card-body text-center">
+              <img src="../imgcode1.png" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+              <h5 class="my-3"> <?php echo htmlspecialchars($userName); ?></h5>
+              <p class="text-muted mb-1">Full Stack Developer</p>
+              <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+              <div class="d-flex justify-content-center mb-2">
+                <input type="file">
+              </div>
+            </div>
 <div class="profile-container">
     <h2 class="profile-header">Profil Pengguna</h2>
     <div class="profile-info">
