@@ -2,21 +2,21 @@
 session_start();
 include('../koneksi.php');
 
-if (!isset($_SESSION['email'])) {
-    // Jika pengguna belum masuk, arahkan mereka kembali ke halaman login
-    header("Location: login.php");
-    exit();
-}
+// if (!isset($_SESSION['email'])) {
+//     // Jika pengguna belum masuk, arahkan mereka kembali ke halaman login
+//     header("Location: login.php");
+//     exit();
+// }
 
 // Pengguna sudah masuk, Anda dapat mengakses data sesi
 $email = $_SESSION['email'];
 $userName = $_SESSION['username'];
 
-// Check if 'id_venue' session variable is set
-if (!isset($_SESSION['id_venue'])) {
-    header('Location: login.php');
-    exit;
-}
+// // Check if 'id_venue' session variable is set
+// if (!isset($_SESSION['id_venue'])) {
+//     header('Location: login.php');
+//     exit;
+// }
 
 $id_venue = $_SESSION['id_venue']; // Now this should work
 

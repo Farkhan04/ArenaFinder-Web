@@ -62,7 +62,20 @@ if ($fetchVenueIdResult && mysqli_num_rows($fetchVenueIdResult) > 0) {
     $venueRow = mysqli_fetch_assoc($fetchVenueIdResult);
     $id_venue = $venueRow['id_venue'];
     $id_lapangan = $venueRow['id_lapangan'];
+
+    // Ambil harga dari database
+$fetchPriceQuery = "SELECT price FROM venue_price WHERE id_venue = '$id_venue' AND date = '$tgl' AND membership = '$anggota' LIMIT 1";
+$fetchPriceResult = mysqli_query($conn, $fetchPriceQuery);
+if ($fetchPriceResult && mysqli_num_rows($fetchPriceResult) > 0) {
+    $priceRow = mysqli_fetch_assoc($fetchPriceResult);
+    $harga = $priceRow['price'];
+} else {
+    $error = "Harga tidak ditemukan untuk tanggal dan jenis lapangan ini.";
 }
+}
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -185,6 +198,7 @@ if ($fetchVenueIdResult && mysqli_num_rows($fetchVenueIdResult) > 0) {
             return true; // Mengizinkan form untuk dikirim
         }
     </script>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.3"></script>
