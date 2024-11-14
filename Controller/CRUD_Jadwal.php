@@ -134,13 +134,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 
-
 // Refresh halaman dengan pesan berhasil atau gagal
 if ($error || $sukses || $error2 || $sukses2) {
-    $refreshUrl = "../admin/admin_jadwallapangan.php";
-    if ($error2 || $sukses2) {
-        $refreshUrl .= "#tabel-card";
+    if ($sukses) {
+        // Jika berhasil ditambahkan atau diupdate, langsung redirect ke halaman admin jadwal lapangan
+        header("Location: ../admin/admin_jadwallapangan.php");
+        exit();
+    } else {
+        // Jika ada error atau pesan sukses lainnya, refresh dengan delay 2 detik
+        $refreshUrl = "../admin/admin_jadwallapangan.php";
+        if ($error2 || $sukses2) {
+            $refreshUrl .= "#tabel-card";
+        }
+        header("refresh:2;url=$refreshUrl");
+        exit();
     }
-    header("refresh:2;url=$refreshUrl");
-    exit();
 }
+

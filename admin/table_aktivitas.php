@@ -87,7 +87,7 @@ include("../koneksi.php");
                 <td><?php echo $jam; ?> Jam</td>
                 <td><?php echo $harga; ?></td>
                 <td>
-                    <img src="../public/img/venue/<?php echo $foto; ?>" alt="Image" style="width: 100px; height: 100px;">
+                    <img src="../img/<?php echo $foto; ?>" alt="Image" style="width: 100px; height: 100px;">
                 </td>
                 <td>
                     <?php if ($emailSession !== 'arenafinder.app@gmail.com'): ?>

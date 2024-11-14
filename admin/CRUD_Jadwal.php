@@ -64,14 +64,14 @@ if ($fetchVenueIdResult && mysqli_num_rows($fetchVenueIdResult) > 0) {
     $id_lapangan = $venueRow['id_lapangan'];
 
     // Ambil harga dari database
-$fetchPriceQuery = "SELECT price FROM venue_price WHERE id_venue = '$id_venue' AND date = '$tgl' AND membership = '$anggota' LIMIT 1";
-$fetchPriceResult = mysqli_query($conn, $fetchPriceQuery);
-if ($fetchPriceResult && mysqli_num_rows($fetchPriceResult) > 0) {
-    $priceRow = mysqli_fetch_assoc($fetchPriceResult);
-    $harga = $priceRow['price'];
-} else {
-    $error = "Harga tidak ditemukan untuk tanggal dan jenis lapangan ini.";
-}
+    $fetchPriceQuery = "SELECT price FROM venue_price WHERE id_venue = '$id_venue' AND date = '$tgl' AND membership = '$anggota' LIMIT 1";
+    $fetchPriceResult = mysqli_query($conn, $fetchPriceQuery);
+    if ($fetchPriceResult && mysqli_num_rows($fetchPriceResult) > 0) {
+        $priceRow = mysqli_fetch_assoc($fetchPriceResult);
+        $harga = $priceRow['price'];
+    } else {
+        $error = "Harga tidak ditemukan untuk tanggal dan jenis lapangan ini.";
+    }
 }
 
 
@@ -181,24 +181,107 @@ if ($fetchPriceResult && mysqli_num_rows($fetchPriceResult) > 0) {
     </div>
     </div>
 
-    <script>
-        // Mendapatkan elemen input dari DOM
-        const waktuMulaiInput = document.getElementById("waktu-mulai"); // Input waktu mulai
-        const waktuAkhirInput = document.getElementById("waktu-selesai"); // Input waktu selesai
+<script>
+                    const waktuMulaiInput = document.getElementById("waktu-mulai");
+                    const waktuAkhirInput = document.getElementById("waktu-selesai");
+                    const hargaInput = document.getElementById("harga");
+                    const jenisLapanganSelect = document.getElementById("jenis_lap");
+                    const keanggotaanMember = document.getElementById("member");
+                    const keanggotaanNonMember = document.getElementById("nonmember");
 
-        function validasiForm() {
-            const waktuMulai = waktuMulaiInput.value; // Nilai input waktu mulai
-            const waktuSelesai = waktuAkhirInput.value; // Nilai input waktu selesai
+                    waktuMulaiInput.addEventListener("input", calculatePrice);
+                    waktuAkhirInput.addEventListener("input", calculatePrice);
+                    jenisLapanganSelect.addEventListener("change", calculatePrice);
+                    keanggotaanMember.addEventListener("change", calculatePrice);
+                    keanggotaanNonMember.addEventListener("change", calculatePrice);
 
-            if (waktuMulai >= waktuSelesai) {
-                alert("Waktu mulai harus lebih kecil dari waktu selesai.");
-                return false; // Mencegah form dari pengiriman
-            }
+                    function calculatePrice() {
+                        const waktuMulai = waktuMulaiInput.value;
+                        const waktuAkhir = waktuAkhirInput.value;
+                        const selectedLapangan = jenisLapanganSelect.value;
+                        const isMember = keanggotaanMember.checked;
+                        const isNonMember = keanggotaanNonMember.checked;
 
-            return true; // Mengizinkan form untuk dikirim
-        }
-    </script>
+                        if (waktuMulai && waktuAkhir) {
+                            const [startHour, startMinute] = waktuMulai.split(":").map(Number);
+                            const [endHour, endMinute] = waktuAkhir.split(":").map(Number);
 
+                            const startMinutes = startHour * 60 + startMinute;
+                            const endMinutes = endHour * 60 + endMinute;
+
+                            if (startMinutes < endMinutes) {
+                                const durationHours = (endMinutes - startMinutes) / 60;
+                                let pricePerHour = 0;
+
+                                if (startHour === 16 && endHour === 17) {
+                                    // Check if waktuMulai is between 16:00 and 17:00 (break time)
+                                    hargaInput.value = "Durasi waktu istirahat";
+                                    hargaInput.style.color = "red";
+                                    return; // Stop further processing
+                                }
+
+                                switch (selectedLapangan) {
+                                    case "Bulu tangkis":
+                                        pricePerHour = 18000;
+                                        break;
+                                    case "Renang":
+                                        pricePerHour = 8000;
+                                        break;
+                                    case "Futsal":
+                                        if (isMember) {
+                                            // Member pricing
+                                            if (startHour >= 7 && endHour <= 16) {
+                                                // Session from 7 AM to 4 PM
+                                                pricePerHour = 90000;
+                                            } else if (startHour >= 17 && endHour <= 24) {
+                                                // Session from 5 PM to 12 AM
+                                                pricePerHour = 120000;
+                                            } else {
+                                                // Invalid time range
+                                                hargaInput.value = "Input selisih waktu salah";
+                                                hargaInput.style.color = "red";
+                                                return;
+                                            }
+                                        } else if (isNonMember) {
+                                            // Non-Member pricing
+                                            if (startHour >= 7 && endHour <= 16) {
+                                                // Session from 7 AM to 4 PM
+                                                pricePerHour = 105000;
+                                            } else if (startHour >= 17 && endHour <= 24) {
+                                                // Session from 5 PM to 12 AM
+                                                pricePerHour = 135000;
+                                            } else {
+                                                // Invalid time range
+                                                hargaInput.value = "Input selisih waktu salah";
+                                                hargaInput.style.color = "red";
+                                                return;
+                                            }
+                                        }
+                                        break;
+                                    default:
+                                        // Default case, cabor not recognized
+                                        hargaInput.value = "Harga tidak diketahui";
+                                        hargaInput.style.color = "black";
+                                        return;
+                                }
+
+                                const totalPrice = durationHours * pricePerHour;
+                                hargaInput.value = totalPrice;
+
+                                // Remove any previous warning
+                                hargaInput.style.color = "black";
+                            } else {
+                                // Invalid time range, display a warning
+                                hargaInput.value = "Input selisih waktu salah";
+                                hargaInput.style.color = "red";
+                            }
+                        } else {
+                            // One or both input fields are empty, clear the harga field
+                            hargaInput.value = "";
+                            hargaInput.style.color = "black";
+                        }
+                    }
+                </script>
 
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.3"></script>
